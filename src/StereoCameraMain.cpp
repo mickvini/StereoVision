@@ -1,4 +1,4 @@
-#pragma once
+п»ї#pragma once
 #include "StereoVision.h"
 #include "Encode.h"
 #include <iostream>
@@ -8,7 +8,7 @@
 #include <conio.h>
 #include <cstdlib>
 
-// Метод для сканирования доступных устройств
+// РњРµС‚РѕРґ РґР»СЏ СЃРєР°РЅРёСЂРѕРІР°РЅРёСЏ РґРѕСЃС‚СѓРїРЅС‹С… СѓСЃС‚СЂРѕР№СЃС‚РІ
 std::vector<int> ScanAvailableDevices() {
     std::vector<int> availableDevices;
     for (int i = 0; i < 1; ++i) {
@@ -21,38 +21,38 @@ std::vector<int> ScanAvailableDevices() {
     return availableDevices;
 }
 
-// Метод для вывода списка доступных устройств
+// РњРµС‚РѕРґ РґР»СЏ РІС‹РІРѕРґР° СЃРїРёСЃРєР° РґРѕСЃС‚СѓРїРЅС‹С… СѓСЃС‚СЂРѕР№СЃС‚РІ
 void PrintAvailableDevices(const std::vector<int>& availableDevices) {
-    std::cout << "Доступные устройства:" << std::endl;
+    std::cout << "Р”РѕСЃС‚СѓРїРЅС‹Рµ СѓСЃС‚СЂРѕР№СЃС‚РІР°:" << std::endl;
     for (int i = 0; i < availableDevices.size(); ++i) {
-        std::cout << "[" << i << "] Устройство с индексом " << availableDevices[i] << std::endl;
+        std::cout << "[" << i << "] РЈСЃС‚СЂРѕР№СЃС‚РІРѕ СЃ РёРЅРґРµРєСЃРѕРј " << availableDevices[i] << std::endl;
     }
 }
 
-// Метод для выбора устройства пользователем
+// РњРµС‚РѕРґ РґР»СЏ РІС‹Р±РѕСЂР° СѓСЃС‚СЂРѕР№СЃС‚РІР° РїРѕР»СЊР·РѕРІР°С‚РµР»РµРј
 int SelectDevice(const std::vector<int>& availableDevices) {
     int selectedDeviceIndex;
     while (true) {
-        std::cout << "Выберите устройство (введите номер): ";
+        std::cout << "Р’С‹Р±РµСЂРёС‚Рµ СѓСЃС‚СЂРѕР№СЃС‚РІРѕ (РІРІРµРґРёС‚Рµ РЅРѕРјРµСЂ): ";
         std::cin >> selectedDeviceIndex;
 
-        // Проверяем, корректен ли ввод
+        // РџСЂРѕРІРµСЂСЏРµРј, РєРѕСЂСЂРµРєС‚РµРЅ Р»Рё РІРІРѕРґ
         if (std::cin.fail() || selectedDeviceIndex < 0 || selectedDeviceIndex >= availableDevices.size()) {
-            std::cin.clear(); // Сбрасываем флаг ошибки
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Очищаем буфер ввода
-            std::cerr << "Неверный выбор устройства! Пожалуйста, введите число от 0 до "
+            std::cin.clear(); // РЎР±СЂР°СЃС‹РІР°РµРј С„Р»Р°Рі РѕС€РёР±РєРё
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // РћС‡РёС‰Р°РµРј Р±СѓС„РµСЂ РІРІРѕРґР°
+            std::cerr << "РќРµРІРµСЂРЅС‹Р№ РІС‹Р±РѕСЂ СѓСЃС‚СЂРѕР№СЃС‚РІР°! РџРѕР¶Р°Р»СѓР№СЃС‚Р°, РІРІРµРґРёС‚Рµ С‡РёСЃР»Рѕ РѕС‚ 0 РґРѕ "
                 << availableDevices.size() - 1 << "." << std::endl;
         }
         else {
-            break; // Ввод корректен, выходим из цикла
+            break; // Р’РІРѕРґ РєРѕСЂСЂРµРєС‚РµРЅ, РІС‹С…РѕРґРёРј РёР· С†РёРєР»Р°
         }
     }
     return selectedDeviceIndex;
 }
 
-// Метод для обработки кадров
+// РњРµС‚РѕРґ РґР»СЏ РѕР±СЂР°Р±РѕС‚РєРё РєР°РґСЂРѕРІ
 void FrameHandler(const cv::Mat& leftFrame) {
-    std::cout << "Получен новый кадр!" << std::endl;
+    std::cout << "РџРѕР»СѓС‡РµРЅ РЅРѕРІС‹Р№ РєР°РґСЂ!" << std::endl;
     cv::imshow("Left Frame", leftFrame);
     /*CompressAndSaveImage(leftFrame, "C:\\Users\\romanyuk_ei\\Pictures\\StereoVision\\output.jpg");
     DecodeAndDisplayFrame("C:\\Users\\romanyuk_ei\\Pictures\\StereoVision\\output.jpg");*/
@@ -62,11 +62,11 @@ void FrameHandler(const cv::Mat& leftFrame) {
 int main() {
     putenv("OPENCV_VIDEOIO_MSMF_ENABLE_HW_TRANSFORMS=0");
     std::setlocale(LC_ALL, "Russian");   
-    // Сканируем доступные устройства
+    // РЎРєР°РЅРёСЂСѓРµРј РґРѕСЃС‚СѓРїРЅС‹Рµ СѓСЃС‚СЂРѕР№СЃС‚РІР°
     std::vector<int> availableDevices = ScanAvailableDevices();
 
     if (availableDevices.empty()) {
-        std::cerr << "Нет доступных устройств!" << std::endl;
+        std::cerr << "РќРµС‚ РґРѕСЃС‚СѓРїРЅС‹С… СѓСЃС‚СЂРѕР№СЃС‚РІ!" << std::endl;
         return -1;
     }
 
@@ -74,30 +74,30 @@ int main() {
 
     int selectedDeviceIndex = SelectDevice(availableDevices);
 
-    // Создаем объект камеры с выбранным устройством
+    // РЎРѕР·РґР°РµРј РѕР±СЉРµРєС‚ РєР°РјРµСЂС‹ СЃ РІС‹Р±СЂР°РЅРЅС‹Рј СѓСЃС‚СЂРѕР№СЃС‚РІРѕРј
     StereoCamera camera(1280, 960, 30, selectedDeviceIndex);
 
-    // Устанавливаем пользовательский обработчик кадров
+    // РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј РїРѕР»СЊР·РѕРІР°С‚РµР»СЊСЃРєРёР№ РѕР±СЂР°Р±РѕС‚С‡РёРє РєР°РґСЂРѕРІ
     camera.SetFrameCallback(FrameHandler);
 
-    // Запуск видеопотока
+    // Р—Р°РїСѓСЃРє РІРёРґРµРѕРїРѕС‚РѕРєР°
     camera.Start();
 
     
     while (true) {
         if (_kbhit()) {
             char key = _getch(); 
-            if (key == 32) { // 32 - код пробела
+            if (key == 32) { // 32 - РєРѕРґ РїСЂРѕР±РµР»Р°
                 if (camera.IsPaused()) {
                     camera.Start();
-                    std::cout << "Видеопоток возобновлен." << std::endl;
+                    std::cout << "Р’РёРґРµРѕРїРѕС‚РѕРє РІРѕР·РѕР±РЅРѕРІР»РµРЅ." << std::endl;
                 }
                 else {
                     camera.Pause();
-                    std::cout << "Видеопоток на паузе." << std::endl;
+                    std::cout << "Р’РёРґРµРѕРїРѕС‚РѕРє РЅР° РїР°СѓР·Рµ." << std::endl;
                 }
             }
-            else if (key == 27) { // 27 - код клавиши ESC
+            else if (key == 27) { // 27 - РєРѕРґ РєР»Р°РІРёС€Рё ESC
                 break; 
             }
         }
@@ -105,7 +105,7 @@ int main() {
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
     }
 
-    // Остановка видеопотока
+    // РћСЃС‚Р°РЅРѕРІРєР° РІРёРґРµРѕРїРѕС‚РѕРєР°
     camera.Stop();
 
     return 0;

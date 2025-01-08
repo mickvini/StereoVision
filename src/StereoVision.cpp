@@ -1,10 +1,10 @@
-#include "StereoVision.h"
+п»ї#include "StereoVision.h"
 
-// Метод для установки пользовательского обработчика кадров
+// РњРµС‚РѕРґ РґР»СЏ СѓСЃС‚Р°РЅРѕРІРєРё РїРѕР»СЊР·РѕРІР°С‚РµР»СЊСЃРєРѕРіРѕ РѕР±СЂР°Р±РѕС‚С‡РёРєР° РєР°РґСЂРѕРІ
 void StereoCamera::SetFrameCallback(FrameCallback callback) {	
 	frameCallback_ = callback;	
 }
-// Запуск видеопотока
+// Р—Р°РїСѓСЃРє РІРёРґРµРѕРїРѕС‚РѕРєР°
 void StereoCamera::Start() {
 	if(isPaused_)
 	{
@@ -16,7 +16,7 @@ void StereoCamera::Start() {
 	captureThread_ = std::thread(&StereoCamera::CaptureLoop, this);
 }
 
-// Остановка видеопотока
+// РћСЃС‚Р°РЅРѕРІРєР° РІРёРґРµРѕРїРѕС‚РѕРєР°
 void StereoCamera::Stop() {
 	if (!isRunning_) return;
 	isRunning_ = false;
@@ -25,25 +25,25 @@ void StereoCamera::Stop() {
 	}
 }
 
-// Пауза видеопотока
+// РџР°СѓР·Р° РІРёРґРµРѕРїРѕС‚РѕРєР°
 void StereoCamera::Pause() {
 	isPaused_ = true;
 }
 bool StereoCamera::IsPaused() const {
 	return isPaused_;
 }
-// Основной цикл захвата кадров
+// РћСЃРЅРѕРІРЅРѕР№ С†РёРєР» Р·Р°С…РІР°С‚Р° РєР°РґСЂРѕРІ
 void StereoCamera::CaptureLoop() {
 	cv::VideoCapture leftCamera(0);
 	
 
-	// Настройка параметров камеры
+	// РќР°СЃС‚СЂРѕР№РєР° РїР°СЂР°РјРµС‚СЂРѕРІ РєР°РјРµСЂС‹
 	leftCamera.set(cv::CAP_PROP_FRAME_WIDTH, width_);
 	leftCamera.set(cv::CAP_PROP_FRAME_HEIGHT, height_);
 	leftCamera.set(cv::CAP_PROP_FPS, fps_);
 
 	if (!leftCamera.isOpened()) {
-		std::cerr << "Не удалось открыть устройство с индексом: " << deviceIndex_ << std::endl;
+		std::cerr << "РќРµ СѓРґР°Р»РѕСЃСЊ РѕС‚РєСЂС‹С‚СЊ СѓСЃС‚СЂРѕР№СЃС‚РІРѕ СЃ РёРЅРґРµРєСЃРѕРј: " << deviceIndex_ << std::endl;
 		return;
 	}
 
@@ -54,11 +54,11 @@ void StereoCamera::CaptureLoop() {
 			leftCamera >> leftFrame;
 
 			if (leftFrame.empty()) {
-				std::cerr << "Ошибка чтения кадров!" << std::endl;
+				std::cerr << "РћС€РёР±РєР° С‡С‚РµРЅРёСЏ РєР°РґСЂРѕРІ!" << std::endl;
 				continue;
 			}
 
-			// Вызываем пользовательский обработчик кадра
+			// Р’С‹Р·С‹РІР°РµРј РїРѕР»СЊР·РѕРІР°С‚РµР»СЊСЃРєРёР№ РѕР±СЂР°Р±РѕС‚С‡РёРє РєР°РґСЂР°
 			if (frameCallback_) {
 				frameCallback_(leftFrame);
 			}
@@ -68,7 +68,7 @@ void StereoCamera::CaptureLoop() {
 		else
 		{
 			system("cls");
-			std::cerr << "Стоим на паузе";
+			std::cerr << "РЎС‚РѕРёРј РЅР° РїР°СѓР·Рµ";
 			std::this_thread::sleep_for(std::chrono::milliseconds(1000 / fps_));
 		}
 	}

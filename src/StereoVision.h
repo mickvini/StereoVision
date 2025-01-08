@@ -1,4 +1,4 @@
-#pragma once
+п»ї#pragma once
 #include <iostream>
 #include <thread>
 #include <atomic>
@@ -8,28 +8,28 @@
 
 class StereoCamera {
 public:
-	// Тип для обработчика кадров
+	// РўРёРї РґР»СЏ РѕР±СЂР°Р±РѕС‚С‡РёРєР° РєР°РґСЂРѕРІ
 	using FrameCallback = std::function<void(const cv::Mat& leftFrame)>;//, const cv::Mat& rightFrame)>;
 
-	// Конструктор
+	// РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
 	StereoCamera(int width, int height, int fps, int deviceIndex = 0)
 		: width_(width), height_(height), fps_(fps), deviceIndex_(deviceIndex), isRunning_(false), isPaused_(false) {}
 
-	// Деструктор
+	// Р”РµСЃС‚СЂСѓРєС‚РѕСЂ
 	~StereoCamera() {
 		Stop();
 	}
 
-	// Метод для установки пользовательского обработчика кадров
+	// РњРµС‚РѕРґ РґР»СЏ СѓСЃС‚Р°РЅРѕРІРєРё РїРѕР»СЊР·РѕРІР°С‚РµР»СЊСЃРєРѕРіРѕ РѕР±СЂР°Р±РѕС‚С‡РёРєР° РєР°РґСЂРѕРІ
 	void SetFrameCallback(FrameCallback callback);
 
-	// Запуск видеопотока
+	// Р—Р°РїСѓСЃРє РІРёРґРµРѕРїРѕС‚РѕРєР°
 	void Start();
 
-	// Остановка видеопотока
+	// РћСЃС‚Р°РЅРѕРІРєР° РІРёРґРµРѕРїРѕС‚РѕРєР°
 	void Stop();
 
-	// Пауза видеопотока
+	// РџР°СѓР·Р° РІРёРґРµРѕРїРѕС‚РѕРєР°
 	void Pause();
 	bool IsPaused() const;
 
@@ -43,6 +43,6 @@ private:
 	std::thread captureThread_;
 	FrameCallback frameCallback_;
 
-	// Основной цикл захвата кадров
+	// РћСЃРЅРѕРІРЅРѕР№ С†РёРєР» Р·Р°С…РІР°С‚Р° РєР°РґСЂРѕРІ
 	void CaptureLoop();
 };

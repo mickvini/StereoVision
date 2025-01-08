@@ -1,4 +1,4 @@
-#pragma once
+п»ї#pragma once
 #include <iostream>
 #include <opencv2/opencv.hpp>
 extern "C" {
@@ -7,8 +7,8 @@ extern "C" {
 #include <libswscale/swscale.h>
 }
 
-// Добавляем параметры для сжатия
-void EncodeWithFFmpeg(const cv::Mat& frame, int compressionQuality = 75); // По умолчанию качество 75 для JPEG
+// Р”РѕР±Р°РІР»СЏРµРј РїР°СЂР°РјРµС‚СЂС‹ РґР»СЏ СЃР¶Р°С‚РёСЏ
+void EncodeWithFFmpeg(const cv::Mat& frame, int compressionQuality = 75); // РџРѕ СѓРјРѕР»С‡Р°РЅРёСЋ РєР°С‡РµСЃС‚РІРѕ 75 РґР»СЏ JPEG
 
 void DecodeAndDisplayFrame(const std::string& filename);
 
